@@ -1,5 +1,5 @@
 const path = require('path')
-const ClaenWebpackPlugin = require('clean-webpack-plugin') //清除旧的bundle文件
+const CleanWebpackPlugin = require('clean-webpack-plugin') //清除旧的bundle文件
 const HtmlWebpackPlugin = require('html-webpack-plugin') //用于更新html文件，以适应新增的bundle文件
 const webpack = require('webpack')
 
@@ -15,7 +15,7 @@ module.exports = {
         publicPath:'/'
     },
     plugins: [
-        new ClaenWebpackPlugin(['dist']),
+        new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({
             title: '自定义替换后的index.html标题'
         }),
