@@ -7,10 +7,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.config.prod.js",
-    "start": "wepack-dev-server --open --config webpack.config.dev.js"
+    "start": "webpack-dev-server --open --config webpack.config.dev.js"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "babel-preset-react": "^6.24.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {

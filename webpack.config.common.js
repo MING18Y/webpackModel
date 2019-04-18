@@ -6,10 +6,10 @@ const webpack = require('webpack')
 module.exports = {
     entry: {
         app:'./src/index.js',
-        vender:'react',
+        // vender:'react',
     },
     output: {
-        filename: '[name].bundle.js',
+        filename: '[name].[hash].bundle.js',
         path:path.resolve(__dirname,'dist'),
         publicPath:'/'
     },
@@ -17,15 +17,19 @@ module.exports = {
         new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({
             title: '自定义替换后的index.html标题'
-        }),
-        new webpack.ProvidePlugin({
-            $:'jquery'
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-           name: 'vender' // 指定公共 bundle 的名称。
-        })
-        
+        }),      
     ],
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                vendor: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendor',
+                    chunks: 'all',
+                }
+            }
+        }
+    },
 
     module:{
         rules: [
