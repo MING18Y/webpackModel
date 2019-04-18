@@ -5,8 +5,7 @@ const webpack = require('webpack')
 
 module.exports = {
     entry: {
-        app:'./src/index.js',
-        // vender:'react',
+        app:'./src/index.jsx',
     },
     output: {
         filename: '[name].[hash].bundle.js',
@@ -16,7 +15,8 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({
-            title: '自定义替换后的index.html标题'
+            title: 'react common model website',
+            template: 'index.html'
         }),      
     ],
     optimization: {
@@ -76,7 +76,7 @@ module.exports = {
                 use: 'ts-loader'
             },
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 exclude: /(node_modules|bower_components)/, 
                 use: {
                     loader: 'babel-loader',
