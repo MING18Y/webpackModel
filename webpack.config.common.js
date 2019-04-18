@@ -4,10 +4,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin') //用于更新html文�
 const webpack = require('webpack')
 
 module.exports = {
-    mode: 'development',
     entry: {
-        entryName1:'./src/index.js',
-        entryName2:'./src/index.js',
+        app:'./src/index.js',
+        vender:'react',
     },
     output: {
         filename: '[name].bundle.js',
@@ -21,6 +20,9 @@ module.exports = {
         }),
         new webpack.ProvidePlugin({
             $:'jquery'
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+           name: 'vender' // 指定公共 bundle 的名称。
         })
         
     ],
@@ -35,16 +37,23 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(png|svg|jpg|gif)$/,
+                test: /\.(woff|woff2|eot|ttf|otf)$/,
                 use:[
                     'file-loader'
                 ]
             },
             {
-                test:/\.(woff|woff2|eot|ttf|otf)$/,
-                use:[
-                    'file-loader'
-                ]
+                test: /\.(gif|png|jpe?g|svg)$/i,
+                use: [
+                    'file-loader',
+                    {
+                        loader: 'image-webpack-loader',
+                        options: {
+                            bypassOnDebug: true, // webpack@1.x
+                            disable: true, // webpack@2.x and newer
+                        },
+                    },
+                ],
             },
             {
                 test:/\.(csv|tsv)$/,
@@ -57,6 +66,10 @@ module.exports = {
                 use:[
                     'xml-loader'
                 ]
+            },
+            {
+                test: /\.ts$/,
+                use: 'ts-loader'
             },
             {
                 test: /\.js$/,
